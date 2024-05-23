@@ -1,9 +1,18 @@
-import './App.css'
 import { Outlet } from "react-router-dom"
+import { ThemeProvider, createTheme } from "@mui/material"
+
+const darkTheme = createTheme({
+	palette: {
+		mode: "dark"
+	}
+})
 
 function App() {
 	return (
-		<Outlet />
+		// <ThemeProvider theme={darkTheme}>
+			<Outlet />
+		// </ThemeProvider>
+		
 	)
 }
 
