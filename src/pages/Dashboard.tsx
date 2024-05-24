@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Chip, Container, Grid, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import CreateTaskDialog from "../components/CreateTaskDialog";
 
 function createData(
     id: number,
@@ -32,10 +33,14 @@ export default function Dashboard() {
     }
     return (
         <Box style={{ textAlign: "left" }}>
-            <Typography variant="h5">
-                Welcome, Arian
-            </Typography>
-            <DataGrid 
+            <Box display="flex" justifyContent="space-between">
+                <Typography variant="h5">
+                    Welcome, Arian
+                </Typography>
+                <CreateTaskDialog />
+            </Box>
+            
+            {/* <DataGrid 
                 rows={rows}
                 columns={columns}
                 initialState={{
@@ -46,8 +51,27 @@ export default function Dashboard() {
                 }}
                 onRowClick={testRowClick}
                 disableColumnSelector
-                // pageSizeOptions={[5, 10]}
-            />
+            /> */}
+            <Box maxWidth="600px">
+                <Typography variant="body1" marginBottom={1}>Active Tasks</Typography>
+                <Card>
+                    <CardActionArea sx={{ padding: "0.5rem 1rem" }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={9}>
+                                <Typography variant="body2" fontWeight="bold" color="#0AA9E5">Task 12345</Typography>
+                                <Typography variant="body2" fontWeight="bold" marginBottom={1}>Lorem, ipsum dolor sit amet consectetur adipisicing elite</Typography>
+                                {/* <Typography variant="body2">Assigned to:</Typography> */}
+                                <Typography variant="body2">Assigned to: Bill Justin</Typography>
+                            </Grid>
+                            <Grid item xs={3} textAlign="right">
+                                <Chip label="Not started" color="primary" variant="outlined" size="small" />
+                            </Grid>
+                        </Grid>
+                        
+                    </CardActionArea>
+                </Card>
+            </Box>
+            
         </Box>
     )
 }
