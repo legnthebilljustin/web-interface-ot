@@ -1,17 +1,16 @@
 import { Outlet } from "react-router-dom"
-import { ThemeProvider, createTheme } from "@mui/material"
-
-const darkTheme = createTheme({
-	palette: {
-		mode: "dark"
-	}
-})
+import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material"
+import './assets/css/app.css'
+import { theme } from "./assets/themes/app"
 
 function App() {
 	return (
-		// <ThemeProvider theme={darkTheme}>
-			<Outlet />
-		// </ThemeProvider>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<Box sx={{ fontFamily: "Lora" }}>
+				<Outlet />
+			</Box>
+		</ThemeProvider>
 		
 	)
 }

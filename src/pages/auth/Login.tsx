@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Box, Button, TextField, Typography, makeStyles } from '@mui/material';
+import { Box, Button, Container, TextField, Typography, makeStyles } from '@mui/material';
 
 export default function Login() 
 {
@@ -12,11 +12,14 @@ export default function Login()
         console.log("form submitted")
     }
     return (
-        <Box style={{ maxWidth: 300, margin: '0 auto' }}>
-            <form onSubmit={handleSubmit} style={{
-                display: "flex", flexDirection: "column", gap: "1rem"
+        <Box margin="0 auto"
+            display="flex" justifyContent="center" height="100vh"
+            maxWidth={300}
+        >
+            <form onSubmit={handleSubmit} style={{ marginTop: "5rem",
+                display: "flex", flexDirection: "column", gap: "1rem", textAlign: "center"
             }}>
-                <Typography variant="h5">Log in to your account.</Typography>
+                <Typography variant="h6" marginBottom={3}>Sign In</Typography>
                 <TextField label="Email address"
                     type="email"
                     value={email}

@@ -4,7 +4,8 @@ import { RegistrationFormData } from "../../types/auth";
 
 export default function Register() {
     const [formData, setFormData] = useState<RegistrationFormData>({
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: "",
         confirmPassword: ""
@@ -24,15 +25,26 @@ export default function Register() {
     }
 
     return (
-        <Box style={{ maxWidth: 300, margin: '0 auto' }}>
-            <form onSubmit={handleSubmit} style={{
-                display: "flex", flexDirection: "column", gap: "1rem"
+        <Box margin="0 auto"
+            display="flex" justifyContent="center" height="100vh"
+            maxWidth={300}
+        >
+            <form onSubmit={handleSubmit} style={{ marginTop: "5rem",
+                display: "flex", flexDirection: "column", gap: "1rem", textAlign: "center"
             }}>
-                <Typography variant="h5">Employee Registration.</Typography>
-                <TextField label="Name"
+                <Typography variant="h6" marginBottom={3}>Employee Registration</Typography>
+                <TextField label="First Name"
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    required
+                    size="small"
+                />
+                <TextField label="Last Name"
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
                     onChange={handleInputChange}
                     required
                     size="small"
@@ -59,10 +71,11 @@ export default function Register() {
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                     required size="small"
+                    
                 />
 
-                <Button type="submit" variant="contained" size="small">Log In</Button>
-                <Typography variant="subtitle2">No account yet? Register here.</Typography>
+                <Button type="submit" variant="contained" size="small" sx={{ marginTop: "1rem" }}>Register</Button>
+                <Typography variant="subtitle2">Have an existing account?<br /> Login here.</Typography>
             </form>
         </Box>
     );

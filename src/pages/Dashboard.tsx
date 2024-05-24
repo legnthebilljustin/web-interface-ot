@@ -1,77 +1,57 @@
 import { Box, Card, CardActionArea, CardContent, Chip, Container, Grid, Typography } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import CreateTaskDialog from "../components/CreateTaskDialog";
+import TaskDataGrid from "../components/TaskDataGrid";
 
 function createData(
     id: number,
     name: string,
     assignedTo: string,
-    status: string,
-    dateCreated: string
+    status: number,
+    deadline: string,
+    createdAt: string,
+    description: string | null
 ) {
-    return { id, name, assignedTo, status, dateCreated }
+    return { id, name, assignedTo, status, deadline, description, createdAt }
 }
 
 const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 70},
-    { field: "name", headerName: "Task Name", width: 150 },
+    { field: "id",  headerName: "ID", width: 70},
+    { 
+        field: "name", 
+        headerName: "Task Name", 
+        width: 300,
+        cellClassName: "link-color"
+    },
     { field: "assignedTo", headerName: "Assigned To", width: 130 },
     { field: "status", headerName: "Status", width: 90 },
-    { field: "date", headerName: "Date Created", width: 130 },
+    { field: "deadline", headerName: "Deadline", width: 130 },
+    { field: "created at", headerName: "Date Created", width: 130 },
 ]
 
 const rows = [
-    createData(1, "Create a button", "mark", "awaiting", "2024-04-21"),
-    createData(2, "Create a dropdown", "mark", "in progress", "2024-04-21"),
-    createData(3, "Change background color", "mark", "awaiting", "2024-04-21"),
-    createData(4, "Create a button", "mark", "awaiting", "2024-04-21"),
+    createData(1, "Create a button", "mark", 1, "2024-04-21", "2024-04-21", ""),
+    createData(2, "Create a dropdown", "mark", 2, "2024-04-21", "2024-04-21", ""),
+    createData(3, "Change background color", "eric", 3, "2024-04-21", "2024-04-21", ""),
+    createData(4, "Create a button", "mark", 4, "2024-04-21", "2024-04-21", ""),
 ]
 
 export default function Dashboard() {
-    const testRowClick = (params: any) => {
-        const { id } = params.row
-    }
+    
     return (
-        <Box style={{ textAlign: "left" }}>
+        <Container maxWidth="md" sx={{ padding: "1rem 0"}}>
             <Box display="flex" justifyContent="space-between">
                 <Typography variant="h5">
                     Welcome, Arian
                 </Typography>
+                
                 <CreateTaskDialog />
             </Box>
-            
-            {/* <DataGrid 
-                rows={rows}
-                columns={columns}
-                initialState={{
-                    density: "compact",
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 5 }
-                    }
-                }}
-                onRowClick={testRowClick}
-                disableColumnSelector
-            /> */}
-            <Box maxWidth="600px">
-                <Typography variant="body1" marginBottom={1}>Active Tasks</Typography>
-                <Card>
-                    <CardActionArea sx={{ padding: "0.5rem 1rem" }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={9}>
-                                <Typography variant="body2" fontWeight="bold" color="#0AA9E5">Task 12345</Typography>
-                                <Typography variant="body2" fontWeight="bold" marginBottom={1}>Lorem, ipsum dolor sit amet consectetur adipisicing elite</Typography>
-                                {/* <Typography variant="body2">Assigned to:</Typography> */}
-                                <Typography variant="body2">Assigned to: Bill Justin</Typography>
-                            </Grid>
-                            <Grid item xs={3} textAlign="right">
-                                <Chip label="Not started" color="primary" variant="outlined" size="small" />
-                            </Grid>
-                        </Grid>
-                        
-                    </CardActionArea>
-                </Card>
-            </Box>
-            
-        </Box>
+            <Typography variant="body2" margin="2rem 0 1rem 0">
+                All Availabe Tasks:
+            </Typography>
+            <TaskDataGrid rows={rows} columns={columns} />
+        </Container>
+
     )
 }
